@@ -35,9 +35,12 @@ class SessionTracing(requests.sessions.Session):
             try:
                 resp = super(SessionTracing, self).request(method, url, *args, **kwargs)
                 span.set_tag(tags.HTTP_STATUS_CODE, resp.status_code)
-            except Exception:
+            except Exception as exc:
                 span.set_tag(tags.ERROR, True)
-                span.set_tag('error.object', format_exc())
+                span.set_tag('sfx.error.kind', exc.__class__.__name__)
+                span.set_tag('sfx.error.object', str(exc.__class__))
+                span.set_tag('sfx.error.message', str(exc))
+                span.set_tag('sfx.error.stack', format_exc())
                 raise
 
         return resp
