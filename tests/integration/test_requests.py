@@ -1,18 +1,25 @@
 # Copyright (C) 2018 SignalFx, Inc. All rights reserved.
-from random import randint
 import sys
+from random import randint
 
-from opentracing.mocktracer import MockTracer
-from opentracing.ext import tags as ext_tags
 import docker
 import pytest
-
-from requests_opentracing import SessionTracing
 import requests
+from opentracing.mocktracer import MockTracer
+from opentracing.ext import tags as ext_tags
+from packaging.version import parse as parse_version
+from requests_opentracing import SessionTracing
 
 
 server_port = 5678
 server = 'http://localhost:{}'.format(server_port)
+
+if parse_version(requests.__version__) < parse_version('2.22.0'):
+    error_type = 'ConnectionError'
+    error_message = 'nodename nor servname provided, or not known'
+else:
+    error_type = 'InvalidURL'
+    error_message = 'Failed to parse: https://localhost:123456789'
 
 
 @pytest.fixture(scope='session')
@@ -87,4 +94,7 @@ class TestSessionTracing(object):
         assert tags[ext_tags.HTTP_METHOD] == method
         assert tags[ext_tags.HTTP_URL] == invalid_server
         assert tags[ext_tags.ERROR] is True
-        assert str(re.value) in tags['error.object']
+        assert tags['sfx.error.kind'] == error_type
+        assert tags['sfx.error.object'] == '<class \'requests.exceptions.' + error_type + '\'>'
+        assert error_message in tags['sfx.error.message'] 
+        assert len(tags['sfx.error.stack']) > 50

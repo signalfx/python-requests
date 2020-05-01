@@ -26,7 +26,7 @@ with open(os.path.join(cwd, 'README.rst')) as readme_file:
     long_description = readme_file.read()
 
 # Keep these separated for tox extras
-test_requirements = ['mock', 'pytest']
+test_requirements = ['mock', 'pytest', 'packaging']
 integration_test_requirements = ['docker']
 
 setup(
