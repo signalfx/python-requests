@@ -9,11 +9,11 @@ import opentracing
 
 class SessionTracing(requests.sessions.Session):
 
-    def __init__(self, tracer=None, propagate=True, span_tags=None):
+    def __init__(self, tracer=None, propagate=True, span_tags=None, *args, **kwargs):
         self._tracer = tracer or opentracing.tracer
         self._propagate = propagate
         self._span_tags = span_tags or {}
-        super(SessionTracing, self).__init__()
+        super(SessionTracing, self).__init__(*args, **kwargs)
 
     def request(self, method, url, *args, **kwargs):
         lower_method = method.lower()
