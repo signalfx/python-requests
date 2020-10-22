@@ -31,7 +31,7 @@ integration_test_requirements = ['docker']
 
 setup(
     name='Requests-OpenTracing',
-    version='0.2.0post1',
+    version='0.2.0post2',
     url='http://github.com/opentracing-contrib/python-requests',
     download_url='http://github.com/opentracing-contrib/python-requests/tarball/master',
     author='SignalFx, Inc.',
