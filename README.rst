@@ -28,7 +28,7 @@ Run the following command:
 
 .. code-block:: 
 
-    $ pip install requests-opentracing
+    $ pip install requests_opentracing
 
 Usage
 =====

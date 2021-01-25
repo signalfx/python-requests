@@ -30,10 +30,10 @@ test_requirements = ['mock', 'pytest', 'packaging']
 integration_test_requirements = ['docker']
 
 setup(
-    name='Requests-OpenTracing',
-    version='0.2.0post2',
-    url='http://github.com/opentracing-contrib/python-requests',
-    download_url='http://github.com/opentracing-contrib/python-requests/tarball/master',
+    name='signalfx-instrumentation-requests',
+    version='1.0.0',
+    url='http://github.com/signalfx/python-requests',
+    download_url='http://github.com/signalfx/python-requests/tarball/master',
     author='SignalFx, Inc.',
     author_email='signalfx-oss@splunk.com',
     description='OpenTracing support for Requests',
