@@ -31,7 +31,7 @@ integration_test_requirements = ['docker']
 
 setup(
     name='signalfx-instrumentation-requests',
-    version='1.0.0',
+    version='1.0.1',
     url='http://github.com/signalfx/python-requests',
     download_url='http://github.com/signalfx/python-requests/tarball/master',
     author='SignalFx, Inc.',

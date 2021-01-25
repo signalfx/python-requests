@@ -28,7 +28,7 @@ Run the following command:
 
 .. code-block:: 
 
-    $ pip install requests_opentracing
+    $ pip install signalfx-instrumentation-requests
 
 Usage
 =====
